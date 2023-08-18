@@ -11,6 +11,7 @@ class CONRAN{
 public:
     struct Point A[100];
     int DoDai;
+    int HuongHienTai=0;
     CONRAN(){
         DoDai = 3;
         A[0].x = 12; A[0].y = 10;
@@ -29,13 +30,21 @@ public:
         }
     }
     void DiChuyen(int Huong){
+        // 0 Di qua phai
+        // 1 Di len
+        // 2 Di qua trai
+        // 3 Di xuong
+        if ((Huong==0 && HuongHienTai==2)||(Huong==1 && HuongHienTai==3)||(Huong==2 && HuongHienTai==0)||(Huong==3 && HuongHienTai==1)) {
+            HuongHienTai = HuongHienTai;
+        } else {
+            HuongHienTai = Huong;
+        }
         for (int i = DoDai-1; i>0;i--)
             A[i] = A[i-1];
-        if (Huong==0) A[0].x = A[0].x + 1;
-        if (Huong==1) A[0].y = A[0].y + 1;
-        if (Huong==2) A[0].x = A[0].x - 1;
-        if (Huong==3) A[0].y = A[0].y - 1;
-
+        if (HuongHienTai==0) A[0].x = A[0].x + 1;
+        if (HuongHienTai==1) A[0].y = A[0].y + 1;
+        if (HuongHienTai==2) A[0].x = A[0].x - 1;
+        if (HuongHienTai==3) A[0].y = A[0].y - 1;
     }
 };
 
