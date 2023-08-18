@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1692344578 source:d:\snake_game\main.cpp
+1692350508 source:d:\snake_game\main.cpp
 	<iostream>
 	<windows.h>
 	<cstdlib>
