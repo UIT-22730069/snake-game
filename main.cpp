@@ -13,14 +13,19 @@ public:
     int DoDai;
     CONRAN(){
         DoDai = 3;
-        A[0].x = 10; A[0].y = 10;
+        A[0].x = 12; A[0].y = 10;
         A[1].x = 11; A[1].y = 10;
-        A[2].x = 12; A[2].y = 10;
+        A[2].x = 10; A[2].y = 10;
     }
     void Ve(){
         for (int i = 0; i < DoDai; i++){
             gotoxy(A[i].x,A[i].y);
-            cout<<"X";
+            if (i==0) {
+                cout<<"0";
+            } else {
+                cout<<"X";
+            }
+
         }
     }
     void DiChuyen(int Huong){
@@ -38,7 +43,7 @@ int main()
 {
     CONRAN r;
     int Huong = 0;
-    float TocDo = 500;
+    float TocDo = 300;
     char t;
 
     while (1){
