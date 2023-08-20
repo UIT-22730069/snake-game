@@ -47,9 +47,26 @@ public:
         if (HuongHienTai==3) A[0].y = A[0].y - 1;
     }
 };
-
+void VeKhung(){
+    for(int i = MINX;i<=MAXX;i++)
+    {
+        for(int j = MINX;j<MAXY;j++)
+        {
+            if((i==MINX)|| i==MAXX||j==MINY||j=MAXY)
+            gotoxy(i,j);
+            printf("+");
+        }
+    }
+}
 int main()
 {
+    // ve khung 
+    system("cls");
+    VeKhung();
+    r.Ve();
+    r.DiChuyen(Huong);
+    Sleep(300);
+
     CONRAN r;
     int Huong = 0;
     float TocDo = 300;
