@@ -2,6 +2,12 @@
 #include <windows.h>
 #include <cstdlib>
 #include <conio.h>
+
+#define MINX 10
+#define MAXX 100
+#define MINY 2
+#define MAXY 25
+
 using namespace std;
 void gotoxy( int column, int line );
 struct Point{
@@ -14,9 +20,9 @@ public:
     int HuongHienTai=0;
     CONRAN(){
         DoDai = 3;
-        A[0].x = 12; A[0].y = 10;
-        A[1].x = 11; A[1].y = 10;
-        A[2].x = 10; A[2].y = 10;
+        A[0].x = 16; A[0].y = 7;
+        A[1].x = 15; A[1].y = 7;
+        A[2].x = 14; A[2].y = 7;
     }
     void Ve(){
         for (int i = 0; i < DoDai; i++){
@@ -46,31 +52,35 @@ public:
         if (HuongHienTai==2) A[0].x = A[0].x - 1;
         if (HuongHienTai==3) A[0].y = A[0].y - 1;
     }
+
+    boolean KiemnTraTongTuong() {
+        if (A[0].x == MINX || A[0].x == MAXX || A[0].y == MINY || A[0].y == MAXY) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 };
 void VeKhung(){
-    for(int i = MINX;i<=MAXX;i++)
+    for(int i = MINX;i <= MAXX;i++)
     {
-        for(int j = MINX;j<MAXY;j++)
+        for(int j = MINY; j<= MAXY;j++)
         {
-            if((i==MINX)|| i==MAXX||j==MINY||j=MAXY)
-            gotoxy(i,j);
-            printf("+");
+            if(i==MINX || i==MAXX || j==MINY ||j ==MAXY)
+            {
+                gotoxy(i,j);
+                cout<<"+";
+            }
         }
     }
 }
 int main()
 {
-    // ve khung 
-    system("cls");
-    VeKhung();
-    r.Ve();
-    r.DiChuyen(Huong);
-    Sleep(300);
-
     CONRAN r;
     int Huong = 0;
-    float TocDo = 300;
+    float TocDo = 500;
     char t;
+    boolean DaTongTuong = false;
 
     while (1){
         if (kbhit()){
@@ -81,9 +91,18 @@ int main()
             if (t=='s') Huong = 1;
         }
         system("cls");
+        VeKhung();
         r.Ve();
         r.DiChuyen(Huong);
         Sleep(TocDo);
+        DaTongTuong = r.KiemnTraTongTuong();
+
+        if (DaTongTuong) {
+            system("cls");
+            gotoxy(0,0);
+            printf("Game over!");
+            break;
+        }
     }
 
     return 0;
