@@ -102,8 +102,8 @@ public:
     }
     MOI() {
         ViTri = {
-            rand() % (MAXX - MINX - 1) + MINX,
-            rand() % (MAXY - MINY - 1) + MINY
+            rand() % (MAXX - MINX - 2) + MINX + 1,
+            rand() % (MAXY - MINY - 2) + MINY + 1
         };
     }
     void XuatHien()
@@ -111,8 +111,8 @@ public:
         srand(time(0));
         int x, y ;
         if (DaBiAn) {
-            x = rand() % (MAXX - MINX -1) + MINX;
-            y = rand() % (MAXY - MINY -1) + MINY;
+            x = rand() % (MAXX - MINX -2) + MINX + 1;
+            y = rand() % (MAXY - MINY -2) + MINY + 1;
             ViTri = {
                 x,
                 y,
@@ -142,11 +142,16 @@ void VeKhung(){
         }
     }
 }
+void HienThiDiem(int Diem){
+    gotoxy(25,0);
+    cout<<"Score:"<<Diem;
+}
 int main()
 {
     CONRAN r;
     MOI moi;
     int Huong = 0;
+    int Diem = 0;
     float TocDo = 300;
     char t;
     bool DaTongTuong = false;
@@ -162,6 +167,7 @@ int main()
             if (t=='s') Huong = 1;
         }
         system("cls");
+        HienThiDiem(Diem);
         VeKhung();
         moi.XuatHien();
         r.Ve();
@@ -174,12 +180,15 @@ int main()
         if (DaAnMoi) {
             moi.DaBiAn = true;
             r.LonLen();
+            Diem++;
         }
 
         if (DaTongTuong || DaTongDuoi) {
             system("cls");
-            gotoxy(0,0);
-            printf("Game over!");
+            gotoxy(24,0);
+            cout<<"Game over!";
+            gotoxy(25,1);
+            cout<<"Score:"<<Diem;
             break;
         }
     }
