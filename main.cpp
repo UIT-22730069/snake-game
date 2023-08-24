@@ -2,6 +2,7 @@
 #include <windows.h>
 #include <cstdlib>
 #include <conio.h>
+#include <ctime>
 
 #define MINX 10
 #define MAXX 50
