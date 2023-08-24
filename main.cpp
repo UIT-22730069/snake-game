@@ -41,11 +41,13 @@ public:
         // 1 Di len
         // 2 Di qua trai
         // 3 Di xuong
+        // Chỉ cho rắn rẽ trái/phải hoặc đi thẳng
         if ((Huong==0 && HuongHienTai==2)||(Huong==1 && HuongHienTai==3)||(Huong==2 && HuongHienTai==0)||(Huong==3 && HuongHienTai==1)) {
             HuongHienTai = HuongHienTai;
         } else {
             HuongHienTai = Huong;
         }
+        // Di chuyen
         for (int i = DoDai-1; i>0;i--)
             A[i] = A[i-1];
         if (HuongHienTai==0) A[0].x = A[0].x + 1;
@@ -55,6 +57,7 @@ public:
     }
 
     bool KiemnTraTongTuong() {
+        // kiểm tra tọa độ của đầu có trùng với tọa độ của tường
         if (A[0].x == MINX || A[0].x == MAXX || A[0].y == MINY || A[0].y == MAXY) {
             return true;
         } else {
@@ -63,9 +66,11 @@ public:
     }
     bool KiemTraDaAnMoi(Point moi)
     {
+        // kiểm tra tọa độ của đầu có trùng với tọa độ của mồi
         return A[0].x == moi.x && A[0].y == moi.y;
     }
     void LonLen () {
+        // kiểm tra tọa độ phần từ cuối cùng và phần từ liền kề để biết đuôi rắn đang đi theo hường nào rồi thêm 1 phần tử vào cuối
         if (A[DoDai-2].x < A[DoDai-1].x) {
             A[DoDai].x = A[DoDai-1].x + 1;
             A[DoDai].y = A[DoDai-1].y;
@@ -85,6 +90,7 @@ public:
     }
     bool KiemTraDaTongDuoi()
     {
+        // kiểm tra tọa độ của đầu có trùng với tọa độ của đuôi
         for (int i=3; i <= DoDai-1; i++) {
             if (A[0].x == A[i].x && A[0].y == A[i].y) {
                 return true;
@@ -102,8 +108,8 @@ public:
     }
     MOI() {
         ViTri = {
-            rand() % (MAXX - MINX - 1) + MINX,
-            rand() % (MAXY - MINY - 1) + MINY
+            rand() % (MAXX - MINX - 2) + MINX + 1,
+            rand() % (MAXY - MINY - 2) + MINY + 1
         };
     }
     void XuatHien()
@@ -111,19 +117,22 @@ public:
         srand(time(0));
         int x, y ;
         if (DaBiAn) {
-            x = rand() % (MAXX - MINX -1) + MINX;
-            y = rand() % (MAXY - MINY -1) + MINY;
+            // random tọa độ trong phạm vi chơi
+            // đã bị ăn thì lấy tọa độ mới
+            x = rand() % (MAXX - MINX -2) + MINX + 1;
+            y = rand() % (MAXY - MINY -2) + MINY + 1;
             ViTri = {
                 x,
                 y,
             };
             DaBiAn= false;
         } else {
+            // chưa bị ăn thì lấy tọa độ cũ
             x = ViTri.x;
             y = ViTri.y;
         };
 
-        // Sau khi có tọa độ quả táo thì vẽ lên màn hình
+        // Sau khi có tọa độ mồi thì vẽ lên màn hình
         gotoxy(x, y);
         cout << "M";
     }
@@ -142,11 +151,16 @@ void VeKhung(){
         }
     }
 }
+void HienThiDiem(int Diem){
+    gotoxy(25,0);
+    cout<<"Score:"<<Diem;
+}
 int main()
 {
     CONRAN r;
     MOI moi;
     int Huong = 0;
+    int Diem = 0;
     float TocDo = 300;
     char t;
     bool DaTongTuong = false;
@@ -162,6 +176,7 @@ int main()
             if (t=='s') Huong = 1;
         }
         system("cls");
+        HienThiDiem(Diem);
         VeKhung();
         moi.XuatHien();
         r.Ve();
@@ -174,12 +189,15 @@ int main()
         if (DaAnMoi) {
             moi.DaBiAn = true;
             r.LonLen();
+            Diem++;
         }
 
         if (DaTongTuong || DaTongDuoi) {
             system("cls");
-            gotoxy(0,0);
-            printf("Game over!");
+            gotoxy(24,0);
+            cout<<"Game over!";
+            gotoxy(25,1);
+            cout<<"Score:"<<Diem;
             break;
         }
     }
