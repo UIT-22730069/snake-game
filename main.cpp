@@ -4,7 +4,7 @@
 #include <conio.h>
 
 #define MINX 10
-#define MAXX 100
+#define MAXX 50
 #define MINY 2
 #define MAXY 25
 
