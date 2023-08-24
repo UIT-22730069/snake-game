@@ -83,6 +83,15 @@ public:
         }
         DoDai++;
     }
+    bool KiemTraDaTongDuoi()
+    {
+        for (int i=3; i <= DoDai-1; i++) {
+            if (A[0].x == A[i].x && A[0].y == A[i].y) {
+                return true;
+            }
+        }
+        return false;
+    }
 };
 class MOI{
 public:
