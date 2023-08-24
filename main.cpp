@@ -84,6 +84,41 @@ public:
         DoDai++;
     }
 };
+class MOI{
+public:
+    struct Point ViTri;
+    bool DaBiAn = false;
+    Point XuatViTRi () {
+        return ViTri;
+    }
+    MOI() {
+        ViTri = {
+            rand() % (MAXX - MINX - 1) + MINX,
+            rand() % (MAXY - MINY - 1) + MINY
+        };
+    }
+    void XuatHien()
+    {
+        srand(time(0));
+        int x, y ;
+        if (DaBiAn) {
+            x = rand() % (MAXX - MINX -1) + MINX;
+            y = rand() % (MAXY - MINY -1) + MINY;
+            ViTri = {
+                x,
+                y,
+            };
+            DaBiAn= false;
+        } else {
+            x = ViTri.x;
+            y = ViTri.y;
+        };
+
+        // Sau khi có tọa độ quả táo thì vẽ lên màn hình
+        gotoxy(x, y);
+        cout << "M";
+    }
+};
 void VeKhung(){
     for(int i = MINX;i <= MAXX;i++)
     {
