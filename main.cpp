@@ -151,6 +151,7 @@ int main()
     char t;
     bool DaTongTuong = false;
     bool DaAnMoi = false;
+    bool DaTongDuoi;
 
     while (1){
         if (kbhit()){
@@ -168,13 +169,14 @@ int main()
         Sleep(TocDo);
         DaTongTuong = r.KiemnTraTongTuong();
         DaAnMoi = r.KiemTraDaAnMoi(moi.ViTri);
+        DaTongDuoi = r.KiemTraDaTongDuoi();
 
         if (DaAnMoi) {
             moi.DaBiAn = true;
             r.LonLen();
         }
 
-        if (DaTongTuong) {
+        if (DaTongTuong && DaTongDuoi) {
             system("cls");
             gotoxy(0,0);
             printf("Game over!");
