@@ -151,7 +151,7 @@ int main()
     char t;
     bool DaTongTuong = false;
     bool DaAnMoi = false;
-    bool DaTongDuoi;
+    bool DaTongDuoi = false;
 
     while (1){
         if (kbhit()){
@@ -176,7 +176,7 @@ int main()
             r.LonLen();
         }
 
-        if (DaTongTuong && DaTongDuoi) {
+        if (DaTongTuong || DaTongDuoi) {
             system("cls");
             gotoxy(0,0);
             printf("Game over!");
