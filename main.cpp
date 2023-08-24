@@ -54,12 +54,34 @@ public:
         if (HuongHienTai==3) A[0].y = A[0].y - 1;
     }
 
-    boolean KiemnTraTongTuong() {
+    bool KiemnTraTongTuong() {
         if (A[0].x == MINX || A[0].x == MAXX || A[0].y == MINY || A[0].y == MAXY) {
             return true;
         } else {
             return false;
         }
+    }
+    bool KiemTraDaAnMoi(Point moi)
+    {
+        return A[0].x == moi.x && A[0].y == moi.y;
+    }
+    void LonLen () {
+        if (A[DoDai-2].x < A[DoDai-1].x) {
+            A[DoDai].x = A[DoDai-1].x + 1;
+            A[DoDai].y = A[DoDai-1].y;
+        } else if (A[DoDai-2].x > A[DoDai-1].x){
+            A[DoDai].x = A[DoDai-1].x - 1;
+            A[DoDai].y = A[DoDai-1].y;
+        } else {
+            if (A[DoDai-2].y < A[DoDai-1].y) {
+                A[DoDai].x = A[DoDai-1].x;
+                A[DoDai].y = A[DoDai-1].y + 1;
+            } else {
+                A[DoDai].x = A[DoDai-1].x;
+                A[DoDai].y = A[DoDai-1].y - 1;
+            }
+        }
+        DoDai++;
     }
 };
 void VeKhung(){
