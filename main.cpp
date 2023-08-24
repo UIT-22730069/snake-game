@@ -83,6 +83,15 @@ public:
         }
         DoDai++;
     }
+    bool KiemTraDaTongDuoi()
+    {
+        for (int i=3; i <= DoDai-1; i++) {
+            if (A[0].x == A[i].x && A[0].y == A[i].y) {
+                return true;
+            }
+        }
+        return false;
+    }
 };
 class MOI{
 public:
@@ -142,6 +151,7 @@ int main()
     char t;
     bool DaTongTuong = false;
     bool DaAnMoi = false;
+    bool DaTongDuoi = false;
 
     while (1){
         if (kbhit()){
@@ -159,13 +169,14 @@ int main()
         Sleep(TocDo);
         DaTongTuong = r.KiemnTraTongTuong();
         DaAnMoi = r.KiemTraDaAnMoi(moi.ViTri);
+        DaTongDuoi = r.KiemTraDaTongDuoi();
 
         if (DaAnMoi) {
             moi.DaBiAn = true;
             r.LonLen();
         }
 
-        if (DaTongTuong) {
+        if (DaTongTuong || DaTongDuoi) {
             system("cls");
             gotoxy(0,0);
             printf("Game over!");
