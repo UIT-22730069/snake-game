@@ -119,6 +119,7 @@ public:
         cout << "M";
     }
 };
+
 void VeKhung(){
     for(int i = MINX;i <= MAXX;i++)
     {
@@ -135,10 +136,12 @@ void VeKhung(){
 int main()
 {
     CONRAN r;
+    MOI moi;
     int Huong = 0;
-    float TocDo = 500;
+    float TocDo = 300;
     char t;
-    boolean DaTongTuong = false;
+    bool DaTongTuong = false;
+    bool DaAnMoi = false;
 
     while (1){
         if (kbhit()){
@@ -150,10 +153,17 @@ int main()
         }
         system("cls");
         VeKhung();
+        moi.XuatHien();
         r.Ve();
         r.DiChuyen(Huong);
         Sleep(TocDo);
         DaTongTuong = r.KiemnTraTongTuong();
+        DaAnMoi = r.KiemTraDaAnMoi(moi.ViTri);
+
+        if (DaAnMoi) {
+            moi.DaBiAn = true;
+            r.LonLen();
+        }
 
         if (DaTongTuong) {
             system("cls");
